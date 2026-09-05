@@ -213,13 +213,9 @@ pip install -r requirements.txt
 ```
 
 ### 3. Configure Environment Variables
-Create a `.env` file in the root directory:
-```ini
-SERPAPI_KEY=your_serpapi_api_key
-BASE_SEPOLIA_RPC=https://sepolia.base.org
-BASE_SEPOLIA_CHAIN_ID=84532
-PRIVATE_KEY=your_evm_wallet_private_key
-CONTRACT_ADDRESS=0x49964d2a0E9A8359F3b8b5655f2067C88145A0Fe
+Copy `.env.example` to `.env` and fill in your configuration:
+```bash
+cp .env.example .env
 ```
 
 ---
