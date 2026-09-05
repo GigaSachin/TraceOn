@@ -86,6 +86,7 @@ except (PermissionError, OSError):
 
 # ─── health ──────────────────────────────────────────────────────────────────
 
+@app.get("/health")
 @app.get("/api/health")
 async def health():
     contract = os.getenv("CONTRACT_ADDRESS", "not configured")
@@ -110,6 +111,7 @@ def _get_pipeline():
 
 # ─── verify ──────────────────────────────────────────────────────────────────
 
+@app.post("/verify")
 @app.post("/api/verify")
 async def verify(image: UploadFile = File(...)):
     """
