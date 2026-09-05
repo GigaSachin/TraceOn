@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: verifai-backend
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
+    startCommand: "uvicorn backend.api:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+      - key: BASE_SEPOLIA_RPC
+        value: https://sepolia.base.org
+      - key: BASE_SEPOLIA_CHAIN_ID
+        value: "84532"
+      - key: SERPAPI_KEY
+        sync: false
+      - key: PRIVATE_KEY
+        sync: false
+      - key: CONTRACT_ADDRESS
+        sync: false

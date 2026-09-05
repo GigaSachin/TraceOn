@@ -1,3 +1,5 @@
+import os
+import tempfile
 import cv2
 import numpy as np
 from insightface.app import FaceAnalysis
@@ -6,8 +8,10 @@ from insightface.app import FaceAnalysis
 class FaceEncoder:
 
     def __init__(self):
+        root_dir = os.environ.get("INSIGHTFACE_ROOT", os.path.join(tempfile.gettempdir(), ".insightface"))
         self.app = FaceAnalysis(
             name="buffalo_l",
+            root=root_dir,
             providers=["CPUExecutionProvider"]
         )
 

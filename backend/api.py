@@ -67,9 +67,14 @@ app.add_middleware(
 )
 
 # ─── uploads directory ───────────────────────────────────────────────────────
+import tempfile
 
-UPLOADS_DIR = BACKEND_DIR / "uploads"
-UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+try:
+    UPLOADS_DIR = BACKEND_DIR / "uploads"
+    UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+except (PermissionError, OSError):
+    UPLOADS_DIR = Path(tempfile.gettempdir()) / "verifai_uploads"
+    UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
 
 # ─── health ──────────────────────────────────────────────────────────────────
 
