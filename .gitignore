@@ -8,7 +8,10 @@ __pycache__/
 
 # Backend
 uploads/
+backend/uploads/
+**/uploads/
 *.onnx
+*.log
 
 # Frontend
 frontend/node_modules/

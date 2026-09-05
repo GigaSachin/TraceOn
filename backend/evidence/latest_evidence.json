@@ -1,11 +1,11 @@
 {
   "version": "1.0",
-  "timestamp": "2026-09-05T18:53:49.817221+00:00",
-  "candidate": "Amine Sadok | Flickr",
-  "source": "Flickr",
-  "source_url": "https://www.flickr.com/photos/136209366@N05/",
-  "image_url": "https://live.staticflickr.com/641/21513293052_d9d1260c44_z.jpg",
-  "face_similarity": 0.152302,
-  "similarity_percentage": 15.23,
+  "timestamp": "2026-09-05T19:20:52.412286+00:00",
+  "candidate": "Abhishek M., Achieve Success in English and Grammar ...",
+  "source": "Preply",
+  "source_url": "https://preply.com/en/tutor/6967846",
+  "image_url": "https://i.vimeocdn.com/video/2061130856-5541b8421bb9ced4b5df7afcbbd23c388779e5085fe8eca35e68e32f23b9e428-d?f=webp",
+  "face_similarity": 0.22085,
+  "similarity_percentage": 22.08,
   "decision": "NO_MATCH"
 }
