@@ -139,7 +139,7 @@ async def verify(image: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail=f"Pipeline initialization failed: {exc}")
 
     try:
-        result = pipeline.run(str(image_path), candidate_limit=10)
+        result = pipeline.run(str(image_path), candidate_limit=5)
     except ValueError as exc:
         _cleanup(image_path)
         # Face not detected

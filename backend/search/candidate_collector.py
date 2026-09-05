@@ -69,7 +69,7 @@ class CandidateCollector:
 
             response = requests.get(
                 image_url,
-                timeout=15,
+                timeout=5,
                 headers={
                     "User-Agent": "Mozilla/5.0"
                 }
