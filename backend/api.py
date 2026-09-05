@@ -50,6 +50,14 @@ try:
 except ImportError:
     pass
 
+# ─── Low-memory thread limits for cloud containers ──────────────────────────
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+os.environ["ONNXRUNTIME_ENABLE_MEM_ARENA"] = "0"
+
 # ─── FastAPI ──────────────────────────────────────────────────────────────────
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
@@ -75,18 +83,6 @@ try:
 except (PermissionError, OSError):
     UPLOADS_DIR = Path(tempfile.gettempdir()) / "verifai_uploads"
     UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
-
-# ─── startup warmup ──────────────────────────────────────────────────────────
-
-@app.on_event("startup")
-async def startup_warmup():
-    """Pre-warm face detection models on server startup."""
-    try:
-        from face.encoder import FaceEncoder
-        FaceEncoder()
-    except Exception as exc:
-        print(f"[STARTUP] Model warmup notice: {exc}")
-
 
 # ─── health ──────────────────────────────────────────────────────────────────
 
