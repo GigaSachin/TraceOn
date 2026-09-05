@@ -194,7 +194,7 @@ Executes the full forensic verification pipeline.
 - **Node.js**: `18.0` or higher
 - **Git**
 
-### 2. Setup Backend Environment
+### 2. Setup Backend
 ```bash
 # Clone the repository
 git clone https://github.com/GigaSachin/TraceOn.git
@@ -212,15 +212,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Configure Environment Variables
-Copy `.env.example` to `.env` and fill in your configuration:
-```bash
-cp .env.example .env
-```
-
 ---
 
-### 4. Running the Application
+### 3. Running the Application
 
 #### Option A: Interactive CLI Pipeline
 ```bash
