@@ -102,6 +102,16 @@ async def health():
     }
 
 
+_PIPELINE = None
+
+def _get_pipeline():
+    global _PIPELINE
+    if _PIPELINE is None:
+        from orchestrator.pipeline import VerifaiPipeline
+        _PIPELINE = VerifaiPipeline()
+    return _PIPELINE
+
+
 # ─── verify ──────────────────────────────────────────────────────────────────
 
 @app.post("/api/verify")
@@ -123,15 +133,6 @@ async def verify(image: UploadFile = File(...)):
             shutil.copyfileobj(image.file, f)
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Failed to save image: {exc}")
-
-_PIPELINE = None
-
-def _get_pipeline():
-    global _PIPELINE
-    if _PIPELINE is None:
-        from orchestrator.pipeline import VerifaiPipeline
-        _PIPELINE = VerifaiPipeline()
-    return _PIPELINE
 
     # ── 2. Run pipeline ──────────────────────────────────────────────────────
 
