@@ -1,6 +1,6 @@
 import type { HealthResponse, VerifyResponse } from '../types/verification'
 
-const API_BASE = (import.meta as unknown as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL || 'http://127.0.0.1:8000/api'
+const API_BASE = (import.meta as unknown as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL || 'https://verifai-backend-2tnw.onrender.com/api'
 
 export async function fetchHealth(): Promise<HealthResponse> {
   try {
