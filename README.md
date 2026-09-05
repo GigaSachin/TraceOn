@@ -38,6 +38,7 @@ An end-to-end multimodal intelligence and cryptographic verification pipeline th
 
 ## 🌐 Live Deployments
 
+- **Frontend Web App (Vercel)**: [https://frontend-kappa-five-39.vercel.app](https://frontend-kappa-five-39.vercel.app)
 - **Backend API (Render)**: [https://verifai-backend-2tnw.onrender.com](https://verifai-backend-2tnw.onrender.com)
 - **API Health Check**: [`https://verifai-backend-2tnw.onrender.com/api/health`](https://verifai-backend-2tnw.onrender.com/api/health)
 - **Smart Contract (Base Sepolia)**: [`0x49964d2a0E9A8359F3b8b5655f2067C88145A0Fe`](https://sepolia.basescan.org/address/0x49964d2a0E9A8359F3b8b5655f2067C88145A0Fe)
