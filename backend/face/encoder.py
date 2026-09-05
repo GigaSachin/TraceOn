@@ -13,17 +13,32 @@ class FaceEncoder:
         global _SHARED_APP
         if _SHARED_APP is None:
             root_dir = os.environ.get("INSIGHTFACE_ROOT", os.path.join(tempfile.gettempdir(), ".insightface"))
-            app = FaceAnalysis(
-                name="buffalo_l",
-                root=root_dir,
-                allowed_modules=["detection", "recognition"],
-                providers=["CPUExecutionProvider"]
-            )
-            app.prepare(
-                ctx_id=0,
-                det_size=(640, 640)
-            )
-            _SHARED_APP = app
+            model_name = os.environ.get("INSIGHTFACE_MODEL", "buffalo_s")
+            try:
+                app = FaceAnalysis(
+                    name=model_name,
+                    root=root_dir,
+                    allowed_modules=["detection", "recognition"],
+                    providers=["CPUExecutionProvider"]
+                )
+                app.prepare(
+                    ctx_id=0,
+                    det_size=(320, 320)
+                )
+                _SHARED_APP = app
+            except Exception:
+                # Fallback to buffalo_s if requested model fails
+                app = FaceAnalysis(
+                    name="buffalo_s",
+                    root=root_dir,
+                    allowed_modules=["detection", "recognition"],
+                    providers=["CPUExecutionProvider"]
+                )
+                app.prepare(
+                    ctx_id=0,
+                    det_size=(320, 320)
+                )
+                _SHARED_APP = app
         self.app = _SHARED_APP
 
     # ---------------------------------------

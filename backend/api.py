@@ -76,6 +76,18 @@ except (PermissionError, OSError):
     UPLOADS_DIR = Path(tempfile.gettempdir()) / "verifai_uploads"
     UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
 
+# ─── startup warmup ──────────────────────────────────────────────────────────
+
+@app.on_event("startup")
+async def startup_warmup():
+    """Pre-warm face detection models on server startup."""
+    try:
+        from face.encoder import FaceEncoder
+        FaceEncoder()
+    except Exception as exc:
+        print(f"[STARTUP] Model warmup notice: {exc}")
+
+
 # ─── health ──────────────────────────────────────────────────────────────────
 
 @app.get("/api/health")
