@@ -5,20 +5,26 @@ import numpy as np
 from insightface.app import FaceAnalysis
 
 
+_SHARED_APP = None
+
 class FaceEncoder:
 
     def __init__(self):
-        root_dir = os.environ.get("INSIGHTFACE_ROOT", os.path.join(tempfile.gettempdir(), ".insightface"))
-        self.app = FaceAnalysis(
-            name="buffalo_l",
-            root=root_dir,
-            providers=["CPUExecutionProvider"]
-        )
-
-        self.app.prepare(
-            ctx_id=0,
-            det_size=(640, 640)
-        )
+        global _SHARED_APP
+        if _SHARED_APP is None:
+            root_dir = os.environ.get("INSIGHTFACE_ROOT", os.path.join(tempfile.gettempdir(), ".insightface"))
+            app = FaceAnalysis(
+                name="buffalo_l",
+                root=root_dir,
+                allowed_modules=["detection", "recognition"],
+                providers=["CPUExecutionProvider"]
+            )
+            app.prepare(
+                ctx_id=0,
+                det_size=(640, 640)
+            )
+            _SHARED_APP = app
+        self.app = _SHARED_APP
 
     # ---------------------------------------
     # Encode the main/largest face

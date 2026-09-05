@@ -112,16 +112,24 @@ async def verify(image: UploadFile = File(...)):
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Failed to save image: {exc}")
 
+_PIPELINE = None
+
+def _get_pipeline():
+    global _PIPELINE
+    if _PIPELINE is None:
+        from orchestrator.pipeline import VerifaiPipeline
+        _PIPELINE = VerifaiPipeline()
+    return _PIPELINE
+
     # ── 2. Run pipeline ──────────────────────────────────────────────────────
 
     try:
-        from orchestrator.pipeline import VerifaiPipeline  # pyright: ignore
+        pipeline = _get_pipeline()
     except Exception as exc:
         _cleanup(image_path)
-        raise HTTPException(status_code=500, detail=f"Pipeline import failed: {exc}")
+        raise HTTPException(status_code=500, detail=f"Pipeline initialization failed: {exc}")
 
     try:
-        pipeline = VerifaiPipeline()
         result = pipeline.run(str(image_path), candidate_limit=10)
     except ValueError as exc:
         _cleanup(image_path)
